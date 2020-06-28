@@ -37,22 +37,10 @@ extension AllGroupsTableViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsTableViewCell", for: indexPath) as! AllGroupsTableViewCell
         
-        guard let imageUrl = URL(string: allGroups[indexPath.row].photo) else { return cell }
+        let groups = allGroups[indexPath.row]
         
-        DispatchQueue.global().async {
-            do {
-                let data = try Data(contentsOf: imageUrl)
-                let image = UIImage(data: data)
-                DispatchQueue.main.async {
-                    cell.groupImage?.imageView.image = image
-                }
-            } catch {
-                print(error)
-            }
-        }
-        
-        cell.groupName.text = self.allGroups[indexPath.row].name
-        
+        cell.configure(groups: groups)
+    
         return cell
     }
 }

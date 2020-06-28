@@ -19,8 +19,8 @@ import UIKit
     @IBOutlet private weak var commentControl: ButtonAndCounterControl!
     @IBOutlet private weak var reposts: ButtonAndCounterControl!
     
-    var typeOfContent: String = ""
-    var attachments: Attachments?
+    private var typeOfContent: String = ""
+    private var attachments: Attachments?
     
     func configure(news: News, profiles: Profiles?, groups: AllGroup?) {
         
