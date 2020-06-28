@@ -10,7 +10,7 @@ import RealmSwift
 
 class PhotoController: UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     var token: NotificationToken?
     var photos: Results<Photo>?

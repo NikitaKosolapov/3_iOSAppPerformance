@@ -14,8 +14,8 @@ import Alamofire
 // Define ViewController
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var scrollBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var webView: WKWebView! {
         didSet {

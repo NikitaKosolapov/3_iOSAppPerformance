@@ -12,8 +12,8 @@ import RealmSwift
 
 class MyFriendsViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
     // Realm properties
     var token: NotificationToken?

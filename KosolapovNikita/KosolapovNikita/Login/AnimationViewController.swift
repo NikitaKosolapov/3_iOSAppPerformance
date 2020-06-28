@@ -10,9 +10,9 @@ import UIKit
 
 class AnimationViewController: UIViewController {
     
-    @IBOutlet weak var circle1: UIImageView!
-    @IBOutlet weak var circle2: UIImageView!
-    @IBOutlet weak var circle3: UIImageView!
+    @IBOutlet private weak var circle1: UIImageView!
+    @IBOutlet private weak var circle2: UIImageView!
+    @IBOutlet private weak var circle3: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

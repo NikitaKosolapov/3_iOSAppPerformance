@@ -10,9 +10,9 @@ import RealmSwift
 
 class SelectedPhotoViewController: UIViewController {
     
-    @IBOutlet weak var currentPhotoView: UIImageView! // Setup selected photo
-    @IBOutlet weak var nextPhoto: UIImageView! // Calculated value
-    @IBOutlet weak var likeControl: ButtonAndCounterControl! // Animated like counter
+    @IBOutlet private weak var currentPhotoView: UIImageView! // Setup selected photo
+    @IBOutlet private weak var nextPhoto: UIImageView! // Calculated value
+    @IBOutlet private weak var likeControl: ButtonAndCounterControl! // Animated like counter
     
     var photos: Results<Photo>?
     var profileImages = [UIImage]()
