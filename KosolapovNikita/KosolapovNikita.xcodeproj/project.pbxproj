@@ -16,6 +16,7 @@
 		1118810D242A051C00808D44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1118810B242A051C00808D44 /* Main.storyboard */; };
 		1118810F242A051D00808D44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1118810E242A051D00808D44 /* Assets.xcassets */; };
 		11188112242A051D00808D44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11188110242A051D00808D44 /* LaunchScreen.storyboard */; };
+		112D4D7A24A8C22600CF629F /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D4D7924A8C22600CF629F /* UIImageExtension.swift */; };
 		113769E524A100810014635A /* Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113769E424A100810014635A /* Profiles.swift */; };
 		1139E9512486CC2A00869F49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1139E9502486CC2A00869F49 /* GoogleService-Info.plist */; };
 		1139E953248948B800869F49 /* FirebaseGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E952248948B800869F49 /* FirebaseGroup.swift */; };
@@ -61,6 +62,7 @@
 		1118810E242A051D00808D44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11188111242A051D00808D44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11188113242A051D00808D44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = KosolapovNikita/Main/Info.plist; sourceTree = SOURCE_ROOT; };
+		112D4D7924A8C22600CF629F /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		113769E424A100810014635A /* Profiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profiles.swift; sourceTree = "<group>"; };
 		1139E9502486CC2A00869F49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1139E952248948B800869F49 /* FirebaseGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseGroup.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		11188104242A051B00808D44 /* KosolapovNikita */ = {
 			isa = PBXGroup;
 			children = (
+				112D4D7824A8C1DC00CF629F /* Extensions */,
 				112DC43524683E9F00DBD0F7 /* Main */,
 				1191A88C243092B500E21740 /* Groups */,
 				1117813D24427C7F006B3A3D /* News */,
@@ -171,6 +174,14 @@
 				11ECCB302435E035007C6A90 /* CustomComponents */,
 			);
 			path = KosolapovNikita;
+			sourceTree = "<group>";
+		};
+		112D4D7824A8C1DC00CF629F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				112D4D7924A8C22600CF629F /* UIImageExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		112DC43524683E9F00DBD0F7 /* Main */ = {
@@ -469,6 +480,7 @@
 				1117813F24427CC2006B3A3D /* NewsViewController.swift in Sources */,
 				11C9F1992484EE8F00FC083B /* MyGroupsTableViewCell.swift in Sources */,
 				1139E9912490DD3000869F49 /* AllGroup.swift in Sources */,
+				112D4D7A24A8C22600CF629F /* UIImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

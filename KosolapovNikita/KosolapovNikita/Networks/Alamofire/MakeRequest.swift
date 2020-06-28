@@ -112,12 +112,6 @@ class MakeRequest {
                     print(error)
                 }
             }
-            
-            AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-                
-                guard let json = response.value else { return }
-                print(json)
-            }
         }
     }
     

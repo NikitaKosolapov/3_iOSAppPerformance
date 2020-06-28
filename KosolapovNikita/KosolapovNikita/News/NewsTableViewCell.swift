@@ -19,6 +19,9 @@ import UIKit
     @IBOutlet private weak var commentControl: ButtonAndCounterControl!
     @IBOutlet private weak var reposts: ButtonAndCounterControl!
     
+    var typeOfContent: String = ""
+    var attachments: Attachments?
+    
     func configure(news: News, profiles: Profiles?, groups: AllGroup?) {
         
         // User image and name
@@ -44,45 +47,31 @@ import UIKit
         
         // Photo
         let copyHistoryAttachments = news.copyHistory?[0].attachments?[0]
-        
-        if let typeOfContent = copyHistoryAttachments?.type {
-            switch typeOfContent {
-            case "photo":
-                if let urlOfPhoto = copyHistoryAttachments?.photo?.photo {
-                    setImageToThePhotoImage(string: urlOfPhoto)
-                }
-            case "video":
-                if let urlOfPhoto = copyHistoryAttachments?.video?.photo {
-                    setImageToThePhotoImage(string: urlOfPhoto)
-                }
-            case "album":
-                if let urlOfPhoto = copyHistoryAttachments?.album?.thumb.photo {
-                    setImageToThePhotoImage(string: urlOfPhoto)
-                }
-            default:
-                return
-            }
-        }
-        
         let itemsAttachments = news.attachments?[0]
         
-        if let typeOfContent = itemsAttachments?.type {
-            switch typeOfContent {
-            case "photo":
-                if let photo = itemsAttachments?.photo?.photo {
-                    setImageToThePhotoImage(string: photo)
-                }
-            case "video":
-                if let photo = itemsAttachments?.video?.photo {
-                    setImageToThePhotoImage(string: photo)
-                }
-            case "album":
-                if let photo = itemsAttachments?.album?.thumb.photo {
-                    setImageToThePhotoImage(string: photo)
-                }
-            default:
-                return
+        if let typeOfContent = copyHistoryAttachments?.type {
+            self.typeOfContent = typeOfContent
+            self.attachments = copyHistoryAttachments
+        } else if let typeOfContent = itemsAttachments?.type {
+            self.typeOfContent = typeOfContent
+            self.attachments = itemsAttachments
+        }
+        
+        switch typeOfContent {
+        case "photo":
+            if let urlOfPhoto = attachments?.photo?.photo {
+                setImageToThePhotoImage(string: urlOfPhoto)
             }
+        case "video":
+            if let urlOfPhoto = attachments?.video?.photo {
+                setImageToThePhotoImage(string: urlOfPhoto)
+            }
+        case "album":
+            if let urlOfPhoto = attachments?.album?.thumb.photo {
+                setImageToThePhotoImage(string: urlOfPhoto)
+            }
+        default:
+            return
         }
         
         // Likes
@@ -104,7 +93,6 @@ import UIKit
                 let data = try? Data(contentsOf: imageUrl)
                 if let data = data {
                     let image = UIImage(data: data)
-                    guard image != nil else { return }
                     DispatchQueue.main.async {
                         self.userImage.imageView.image = image
                     }
@@ -119,7 +107,6 @@ import UIKit
                 let data = try? Data(contentsOf: imageUrl)
                 if let data = data {
                     let image = UIImage(data: data)
-                    guard image != nil else { return }
                     DispatchQueue.main.async {
                         self.photo.image = image
                     }
