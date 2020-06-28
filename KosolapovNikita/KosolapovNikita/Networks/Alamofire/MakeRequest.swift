@@ -24,7 +24,7 @@ class MakeRequest {
         let path = "/friends.get"
         let url = initialUrl + path
         
-        DispatchQueue.global().async {
+        
             AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
                 guard let data = response.value else { return }
                 do {
@@ -35,7 +35,7 @@ class MakeRequest {
                     print(error)
                 }
             }
-        }
+        
     }
     
     func getPhotosOfSelectedFriend(ownerId: Int) {
@@ -43,7 +43,7 @@ class MakeRequest {
         let path = "/photos.get"
         let url = initialUrl + path
         
-        DispatchQueue.global().async {
+        
             AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
                 guard let data = response.value else { return }
                 do {
@@ -54,7 +54,7 @@ class MakeRequest {
                     print(error)
                 }
             }
-        }
+        
     }
     
     func getMyGroupsList() {
@@ -62,7 +62,7 @@ class MakeRequest {
         let path = "/groups.get"
         let url = initialUrl + path
         
-        DispatchQueue.global().async {
+        
             AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
                 guard let data = response.value else { return }
                 do {
@@ -73,7 +73,7 @@ class MakeRequest {
                     print(error)
                 }
             }
-        }
+        
     }
     
     func getAllGroupsList(request: String, completion: @escaping ([AllGroup]) -> Void) {
@@ -81,7 +81,7 @@ class MakeRequest {
         let path = "/groups.search"
         let url = initialUrl + path
         
-        DispatchQueue.global().async {
+        
             AF.request(url, method: .get, parameters: parameters).responseData { response in
                 guard let data = response.value else { return }
                 do {
@@ -92,7 +92,7 @@ class MakeRequest {
                     print(error)
                 }
             }
-        }
+        
     }
     
     func getNews(completion: @escaping (NewsResponse?) -> Void) {
@@ -100,7 +100,7 @@ class MakeRequest {
         let path = "/newsfeed.get"
         let url = initialUrl + path
         
-        DispatchQueue.global().async {
+        
             AF.request(url, method: .get, parameters: parameters).responseData { response in
                 
                 guard let data = response.value else { return }
@@ -118,7 +118,7 @@ class MakeRequest {
                 guard let json = response.value else { return }
                 print(json)
             }
-        }
+        
     }
     
     
