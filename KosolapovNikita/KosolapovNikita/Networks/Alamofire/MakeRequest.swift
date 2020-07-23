@@ -102,7 +102,6 @@ class MakeRequest {
         
         DispatchQueue.global().async {
             AF.request(url, method: .get, parameters: parameters).responseData { response in
-                
                 guard let data = response.value else { return }
                 do {
                     let decoder = JSONDecoder()

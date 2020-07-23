@@ -37,9 +37,9 @@ extension AllGroupsTableViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsTableViewCell", for: indexPath) as! AllGroupsTableViewCell
         
-        let groups = allGroups[indexPath.row]
+        let group = allGroups[indexPath.row]
         
-        cell.configure(groups: groups)
+        cell.configure(groups: group)
     
         return cell
     }

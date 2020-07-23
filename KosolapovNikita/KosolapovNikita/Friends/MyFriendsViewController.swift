@@ -54,6 +54,7 @@ class MyFriendsViewController: UIViewController {
     }
     
     func pairTableWithRealm() {
+        
         guard let realm = try? Realm() else { return }
         users = realm.objects(User.self)
         
@@ -141,21 +142,8 @@ extension MyFriendsViewController: UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        // Set user's name to the cell
-        cell.userName.text = user.lastName + " " + user.firstName
+        cell.configure(friend: user)
         
-        // Set user's image to the cell
-        if let imageUrl = URL(string: user.avatarUrl) {
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: imageUrl)
-                if let data = data {
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        cell.userImage.imageView.image = image
-                    }
-                }
-            }
-        }
         return cell
     }
     

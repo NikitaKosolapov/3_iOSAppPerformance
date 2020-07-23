@@ -39,6 +39,7 @@ extension NewsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
         cell.selectionStyle = .none
         
@@ -51,8 +52,8 @@ extension NewsViewController: UITableViewDataSource {
         // Define source ID
         let sourceId = news.sourceId
         
-        // Define owner of news (see documentation)
-        if sourceId > 0  {
+        // Define owner of news (see documentation of VK API)
+        if sourceId > 0 {
             let profiles = allNews.response.profiles.first(where: {$0.id == sourceId})
             cell.configure(news: news, profiles: profiles, groups: nil)
         } else {

@@ -10,32 +10,16 @@ import UIKit
 
 class AllGroupsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var groupImage: CircleImageWithShadowView!
-    @IBOutlet weak var groupName: UILabel!
+    @IBOutlet private weak var groupCircleImage: CircleImageWithShadowView!
+    @IBOutlet private weak var groupNameLabel: UILabel!
     
     func configure(groups: AllGroup) {
-        
+    
         // Icon
         let url = groups.photo
-        setUpImage(url: url)
+        self.groupCircleImage.imageView.loadImageUsingCache(withUrl: url)
         
         // Name
-        self.groupName.text = groups.name
-    }
-    
-    func setUpImage(url: String) {
-        if let imageUrl = URL(string: url) {
-            DispatchQueue.global().async {
-                do {
-                    let data = try Data(contentsOf: imageUrl)
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        self.groupImage.imageView.image = image
-                    }
-                } catch {
-                    print(error)
-                }
-            }
-        }
+        self.groupNameLabel.text = groups.name
     }
 }

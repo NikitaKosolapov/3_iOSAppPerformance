@@ -24,4 +24,14 @@ class MyFriendsTableViewCell: UITableViewCell {
                         self.userImage.transform = CGAffineTransform(scaleX: 1, y: 1)
         })
     }
+    
+    func configure(friend: User) {
+        
+        // Icon
+        let url = friend.avatarUrl
+        self.userImage.imageView.loadImageUsingCache(withUrl: url)
+        
+        // Name
+        self.userName.text = friend.lastName + " " + friend.firstName
+    }
 }

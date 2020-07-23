@@ -71,6 +71,9 @@ extension PhotoController: UICollectionViewDataSource {
         // Set user's image to the cell
         if let photos = photos {
             if let imageUrl = URL(string: photos[indexPath.row].url) {
+                
+                cell.image.image = nil
+                
                 DispatchQueue.global().async {
                     do {
                         let data = try Data(contentsOf: imageUrl)
