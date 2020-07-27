@@ -10,14 +10,14 @@ import UIKit
 
 class AnimationViewController: UIViewController {
     
-    @IBOutlet private weak var circle1: UIImageView!
-    @IBOutlet private weak var circle2: UIImageView!
-    @IBOutlet private weak var circle3: UIImageView!
+    @IBOutlet private weak var circle1ImageView: UIImageView!
+    @IBOutlet private weak var circle2ImageView: UIImageView!
+    @IBOutlet private weak var circle3ImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let circleArray = [circle1, circle2, circle3]
+        let circleArray = [circle1ImageView, circle2ImageView, circle3ImageView]
         
         for circle in circleArray {
             circle?.alpha = 0
@@ -44,8 +44,8 @@ class AnimationViewController: UIViewController {
     }
     
     func runAnimation() {
-        animation(delay: 0, circle: circle1)
-        animation(delay: 0.1, circle: circle2)
-        animation(delay: 0.2, circle: circle3)
+        animation(delay: 0, circle: circle1ImageView)
+        animation(delay: 0.1, circle: circle2ImageView)
+        animation(delay: 0.2, circle: circle3ImageView)
     }
 }

@@ -115,21 +115,26 @@ extension MyFriendsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsTableViewCell", for: indexPath) as! MyFriendsTableViewCell// declare cell
         
         // Animation of appearance of cells and userImages
-        cell.userImage.alpha = 0
+        cell.userImageView.alpha = 0
         
-        UIView.animate(withDuration: 1,
-                       animations: {
-                        cell.userImage.alpha = 1
+        let interactiveAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear, animations: {
+            
+            UIView.animate(withDuration: 1,
+                           delay: 0.1,
+                           usingSpringWithDamping: 0.6,
+                           initialSpringVelocity: 0.6,
+                           options: [],
+                           animations: {
+                            cell.frame.origin.x -= 100
+            })
         })
         
         UIView.animate(withDuration: 1,
-                       delay: 0.1,
-                       usingSpringWithDamping: 0.6,
-                       initialSpringVelocity: 0.6,
-                       options: [],
                        animations: {
-                        cell.frame.origin.x -= 100
+                        cell.userImageView.alpha = 1
         })
+        
+        interactiveAnimator.startAnimation()
         
         // Configurate cells
         var user: User
@@ -154,8 +159,6 @@ extension MyFriendsViewController: UITableViewDataSource {
             return "\(self.firstLettersOfNames[section])"
         }
     }
-    
-
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowProfilePhotos" { // check segue identifier

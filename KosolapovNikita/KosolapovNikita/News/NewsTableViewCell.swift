@@ -11,13 +11,13 @@ import UIKit
 @IBDesignable class NewsTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var userImage: CircleImageWithShadowView!
-    @IBOutlet private weak var name: UILabel!
-    @IBOutlet private weak var date: UILabel!
-    @IBOutlet private weak var textDescription: UILabel!
-    @IBOutlet private weak var photo: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var photoImageView: UIImageView!
     @IBOutlet private weak var likeControl: ButtonAndCounterControl!
     @IBOutlet private weak var commentControl: ButtonAndCounterControl!
-    @IBOutlet private weak var reposts: ButtonAndCounterControl!
+    @IBOutlet private weak var repostsControl: ButtonAndCounterControl!
     
     private var attachments: Attachments?
     
@@ -26,10 +26,10 @@ import UIKit
         // User image and name
         if let profiles = profiles {
             self.userImage.imageView.loadImageUsingCache(withUrl: profiles.photo)
-            self.name.text = profiles.firstName + " " + profiles.lastName
+            self.nameLabel.text = profiles.firstName + " " + profiles.lastName
         } else if let groups = groups {
             self.userImage.imageView.loadImageUsingCache(withUrl: groups.photo)
-            self.name.text = groups.name
+            self.nameLabel.text = groups.name
         }
         
         // Date
@@ -42,10 +42,10 @@ import UIKit
             return dateFormatter.string(from: date)
         }()
         
-        self.date.text = localDate
+        self.dateLabel.text = localDate
         
         // Text description
-        textDescription.text = news.text
+        descriptionLabel.text = news.text
         
         // Photo
         let copyHistoryAttachments = news.copyHistory?[0].attachments?[0]
@@ -60,15 +60,15 @@ import UIKit
         switch attachments?.type {
         case "photo":
             if let urlOfPhoto = attachments?.photo?.photo {
-                self.photo.loadImageUsingCache(withUrl: urlOfPhoto)
+                self.photoImageView.loadImageUsingCache(withUrl: urlOfPhoto)
             }
         case "video":
             if let urlOfPhoto = attachments?.video?.photo {
-                self.photo.loadImageUsingCache(withUrl: urlOfPhoto)
+                self.photoImageView.loadImageUsingCache(withUrl: urlOfPhoto)
             }
         case "album":
             if let urlOfPhoto = attachments?.album?.thumb.photo {
-                self.photo.loadImageUsingCache(withUrl: urlOfPhoto)
+                self.photoImageView.loadImageUsingCache(withUrl: urlOfPhoto)
             }
         default:
             return
@@ -83,7 +83,7 @@ import UIKit
         self.commentControl.setupView()
         
         // Reposts
-        self.reposts.counter = news.reposts.count
-        self.reposts.setupView()
+        self.repostsControl.counter = news.reposts.count
+        self.repostsControl.setupView()
     }
 }

@@ -10,8 +10,8 @@ import UIKit
 
 class MyFriendsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var userImage: CircleImageWithShadowView!
-    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userImageView: CircleImageWithShadowView!
+    @IBOutlet weak var userNameLabel: UILabel!
     
     @IBAction func userImageAnimate() {
         UIView.animate(withDuration: 1,
@@ -20,8 +20,8 @@ class MyFriendsTableViewCell: UITableViewCell {
                        initialSpringVelocity:  0,
                        options: [.curveEaseOut],
                        animations: {
-                        self.userImage.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-                        self.userImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+                        self.userImageView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                        self.userImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
         })
     }
     
@@ -29,9 +29,9 @@ class MyFriendsTableViewCell: UITableViewCell {
         
         // Icon
         let url = friend.avatarUrl
-        self.userImage.imageView.loadImageUsingCache(withUrl: url)
+        self.userImageView.imageView.loadImageUsingCache(withUrl: url)
         
         // Name
-        self.userName.text = friend.lastName + " " + friend.firstName
+        self.userNameLabel.text = friend.lastName + " " + friend.firstName
     }
 }

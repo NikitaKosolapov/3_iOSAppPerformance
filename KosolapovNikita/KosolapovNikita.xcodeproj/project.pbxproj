@@ -628,11 +628,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RTLGBYJM5X;
 				INFOPLIST_FILE = /Users/Nikita/Desktop/Programming/Courses/GB_Swift/2_ClientserverApplications/Homeworks/KosolapovNikita/KosolapovNikita/Main/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.NikitaKosolapov.KosolapovNikita;
 				PRODUCT_NAME = KosolapovNikita;
 				SWIFT_VERSION = 5.0;
@@ -648,11 +649,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RTLGBYJM5X;
 				INFOPLIST_FILE = /Users/Nikita/Desktop/Programming/Courses/GB_Swift/2_ClientserverApplications/Homeworks/KosolapovNikita/KosolapovNikita/Main/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.NikitaKosolapov.KosolapovNikita;
 				PRODUCT_NAME = KosolapovNikita;
 				SWIFT_VERSION = 5.0;
