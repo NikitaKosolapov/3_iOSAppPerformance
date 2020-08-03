@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23f-TQ-5cP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23f-TQ-5cP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -182,7 +182,7 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="147" height="133"/>
                                         <connections>
-                                            <outlet property="image" destination="qIK-SJ-o9m" id="7z7-LL-gge"/>
+                                            <outlet property="photoImageView" destination="qIK-SJ-o9m" id="7z7-LL-gge"/>
                                             <segue destination="PNV-VF-iz4" kind="presentation" identifier="ShowPhotoDetail" id="1dx-YK-7La"/>
                                         </connections>
                                     </collectionViewCell>

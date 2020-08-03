@@ -19,24 +19,24 @@ class MakeRequest {
     let initialUrl = "https://api.vk.com/method" // define initial url
     let accessToken = Session.shared.token // get current token
     
-    func getMyFriendsList() {
-        let parameters: Parameters = ["access_token": accessToken, "fields": "photo_200", "v": 5.103]
-        let path = "/friends.get"
-        let url = initialUrl + path
-        
-        DispatchQueue.global().async {
-            AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
-                guard let data = response.value else { return }
-                do {
-                    let decoder = JSONDecoder()
-                    let decodedResponse = try decoder.decode(MainUserResponse.self, from: data).response.items
-                    self?.saveData(decodedResponse)
-                } catch {
-                    print(error)
-                }
-            }
-        }
-    }
+//    func getMyFriendsList() {
+//        let parameters: Parameters = ["access_token": accessToken, "fields": "photo_200", "v": 5.103]
+//        let path = "/friends.get"
+//        let url = initialUrl + path
+//        
+//        DispatchQueue.global().async {
+//            AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
+//                guard let data = response.value else { return }
+//                do {
+//                    let decoder = JSONDecoder()
+//                    let decodedResponse = try decoder.decode(MainUserResponse.self, from: data).response.items
+//                    self?.saveData(decodedResponse)
+//                } catch {
+//                    print(error)
+//                }
+//            }
+//        }
+//    }
     
     func getPhotosOfSelectedFriend(ownerId: Int) {
         let parameters: Parameters = ["access_token": Session.shared.token, "extended": 1, "owner_id": ownerId, "album_id": "profile", "v": 5.103]

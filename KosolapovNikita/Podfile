@@ -17,4 +17,6 @@ target 'KosolapovNikita' do
   pod 'Firebase/Database'
   pod 'Firebase/Core'
 
+  pod 'SwiftyJSON', '~> 4.0'
+  
 end

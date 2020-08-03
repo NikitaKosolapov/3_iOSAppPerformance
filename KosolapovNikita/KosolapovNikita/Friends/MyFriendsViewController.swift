@@ -12,12 +12,14 @@ import RealmSwift
 
 class MyFriendsViewController: UIViewController {
     
-    @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     // Realm properties
     var token: NotificationToken?
-    var users: Results<User>?
+    //    var users: Results<User>?
+    var users = [User]()
+    let queue = OperationQueue()
     
     // Processed values
     var sortedUsers = [User]()
@@ -39,43 +41,63 @@ class MyFriendsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(UINib(nibName: "MyFriendsTableViewCell", bundle: nil), forCellReuseIdentifier: "MyFriendsTableViewCell")
+        
+        let initialUrl = "https://api.vk.com/method" // define initial url
+        let accessToken = Session.shared.token // get current token
+        
+        
+        let parameters: Parameters = ["access_token": accessToken, "fields": "photo_200", "v": 5.103]
+        let path = "/friends.get"
+        let url = initialUrl + path
+        
+        
+        let request =  AF.request(url, method: .get, parameters: parameters)
+        
+        let getDataOperation = GetDataOperation(request: request)
+        let parseData = ParseData()
+        let reloadTable = ReloadTableViewController(controller: self)
+        
+        parseData.addDependency(getDataOperation)
+        reloadTable.addDependency(parseData)
+        
+        queue.addOperation(getDataOperation)
+        queue.addOperation(parseData)
+        queue.addOperation(reloadTable)
+        
         // Define delegates of table view and search bar
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
         
-        tableView.register(UINib(nibName: "MyFriendsTableViewCell", bundle: nil), forCellReuseIdentifier: "MyFriendsTableViewCell")
-        
         // Observe for users in a Realm
-        pairTableWithRealm()
-        
-        // Get users from a server
-        MakeRequest.shared.getMyFriendsList()
+        //        pairTableWithRealm()
     }
     
-    func pairTableWithRealm() {
-        
-        guard let realm = try? Realm() else { return }
-        users = realm.objects(User.self)
-        
-        token = users!.observe { [weak self] (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial:
-                break
-            case .update(let friends, _, _, _):
-                self?.handleFriends(friends: friends)
-            case .error(let error):
-                fatalError("\(error)")
-            }
-        }
-    }
+//        func pairTableWithRealm() {
+//
+//            guard let realm = try? Realm() else { return }
+//            users = realm.objects(User.self)
+//
+//            token = users.observe { [weak self] (changes: RealmCollectionChange) in
+//                switch changes {
+//                case .initial:
+//                    break
+//                case .update(let friends, _, _, _):
+//                    self?.handleFriends(friends: friends)
+//                case .error(let error):
+//                    fatalError("\(error)")
+//                }
+//            }
+//        }
     
-    func handleFriends(friends: Results<User>) {
+    //    func handleFriends(friends: Results<User>) {
+    func handleFriends(users: [User]) {
         
         guard let tableView = self.tableView else { return }
         
         // Sort users by last name
-        sortedUsers = friends.sorted{$0.lastName < $1.lastName}
+        sortedUsers = users.sorted{$0.lastName < $1.lastName}
         
         // Get array of friends in alphabetical order
         for user in sortedUsers {
@@ -86,7 +108,9 @@ class MyFriendsViewController: UIViewController {
                 usersInAlphabeticalOrder.append([user])
             }
         }
-        tableView.reloadData()
+        DispatchQueue.main.async {
+         tableView.reloadData()
+        }
     }
 }
 
@@ -114,7 +138,8 @@ extension MyFriendsViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsTableViewCell", for: indexPath) as! MyFriendsTableViewCell// declare cell
         
-        // Animation of appearance of cells and userImages
+        // Define interactive animator
+        
         cell.userImageView.alpha = 0
         
         let interactiveAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear, animations: {
@@ -147,7 +172,7 @@ extension MyFriendsViewController: UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        cell.configure(friend: user)
+        cell.configure(user: user)
         
         return cell
     }
@@ -206,7 +231,7 @@ extension MyFriendsViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredUsers = users!.filter({(user: User) in
+        filteredUsers = users.filter({(user: User) in
             return user.lastName.lowercased().contains(searchText.lowercased())
         })
         if(filteredUsers.count == 0){

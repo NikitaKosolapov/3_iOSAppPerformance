@@ -17,8 +17,6 @@
 		1118810F242A051D00808D44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1118810E242A051D00808D44 /* Assets.xcassets */; };
 		11188112242A051D00808D44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11188110242A051D00808D44 /* LaunchScreen.storyboard */; };
 		112D4D7A24A8C22600CF629F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D4D7924A8C22600CF629F /* UIImageViewExtension.swift */; };
-		113769E524A100810014635A /* Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113769E424A100810014635A /* Profiles.swift */; };
-		1139E9512486CC2A00869F49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1139E9502486CC2A00869F49 /* GoogleService-Info.plist */; };
 		1139E953248948B800869F49 /* FirebaseGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E952248948B800869F49 /* FirebaseGroup.swift */; };
 		1139E97C2490004200869F49 /* MyFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1139E97A2490004200869F49 /* MyFriendsTableViewCell.xib */; };
 		1139E9802490151300869F49 /* MyGroupsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1139E97E2490151300869F49 /* MyGroupsTableViewCell.xib */; };
@@ -27,6 +25,7 @@
 		1139E98B2490D1AF00869F49 /* AllGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E98A2490D1AF00869F49 /* AllGroupsTableViewController.swift */; };
 		1139E9912490DD3000869F49 /* AllGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E9902490DD3000869F49 /* AllGroup.swift */; };
 		1139E9942493A24200869F49 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E9932493A24200869F49 /* News.swift */; };
+		113B19A624D68E6A00A9AF30 /* Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113769E424A100810014635A /* Profiles.swift */; };
 		116DAA50246CAA8800007396 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116DAA4F246CAA8800007396 /* User.swift */; };
 		116DAA54246CAA9F00007396 /* MyGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116DAA53246CAA9F00007396 /* MyGroup.swift */; };
 		116FAD1824463A4D004AF850 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FAD1724463A4D004AF850 /* AnimationViewController.swift */; };
@@ -36,6 +35,12 @@
 		116FAD2024505D65004AF850 /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FAD1F24505D65004AF850 /* CustomInteractiveTransition.swift */; };
 		116FAD252454201E004AF850 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FAD242454201E004AF850 /* PhotoCollectionViewCell.swift */; };
 		116FAD2724542A20004AF850 /* SelectedPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FAD2624542A20004AF850 /* SelectedPhotoViewController.swift */; };
+		1185350124D1EFD100FA569A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1185350024D1EFD100FA569A /* GoogleService-Info.plist */; };
+		1185350324D5B3FE00FA569A /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185350224D5B3FE00FA569A /* AsyncOperation.swift */; };
+		1185350524D5BE0400FA569A /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185350424D5BE0400FA569A /* GetDataOperation.swift */; };
+		1185350824D5C3A400FA569A /* ReloadTableViewOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185350724D5C3A400FA569A /* ReloadTableViewOperation.swift */; };
+		1185350A24D5C5D900FA569A /* ParseDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185350924D5C5D900FA569A /* ParseDataOperation.swift */; };
+		1185350C24D5CB7700FA569A /* SaveToRealmOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1185350B24D5CB7700FA569A /* SaveToRealmOperation.swift */; };
 		1191A88624308AE900E21740 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191A88524308AE900E21740 /* PhotoViewController.swift */; };
 		1191A88824308D8A00E21740 /* MyGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191A88724308D8A00E21740 /* MyGroupsTableViewController.swift */; };
 		11C9F193246F30C400FC083B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C9F192246F30C400FC083B /* WebKit.framework */; };
@@ -64,7 +69,6 @@
 		11188113242A051D00808D44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = KosolapovNikita/Main/Info.plist; sourceTree = SOURCE_ROOT; };
 		112D4D7924A8C22600CF629F /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		113769E424A100810014635A /* Profiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profiles.swift; sourceTree = "<group>"; };
-		1139E9502486CC2A00869F49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1139E952248948B800869F49 /* FirebaseGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseGroup.swift; sourceTree = "<group>"; };
 		1139E97A2490004200869F49 /* MyFriendsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyFriendsTableViewCell.xib; sourceTree = "<group>"; };
 		1139E97E2490151300869F49 /* MyGroupsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyGroupsTableViewCell.xib; sourceTree = "<group>"; };
@@ -82,6 +86,12 @@
 		116FAD1F24505D65004AF850 /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
 		116FAD242454201E004AF850 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		116FAD2624542A20004AF850 /* SelectedPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotoViewController.swift; sourceTree = "<group>"; };
+		1185350024D1EFD100FA569A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1185350224D5B3FE00FA569A /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		1185350424D5BE0400FA569A /* GetDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
+		1185350724D5C3A400FA569A /* ReloadTableViewOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadTableViewOperation.swift; sourceTree = "<group>"; };
+		1185350924D5C5D900FA569A /* ParseDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseDataOperation.swift; sourceTree = "<group>"; };
+		1185350B24D5CB7700FA569A /* SaveToRealmOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToRealmOperation.swift; sourceTree = "<group>"; };
 		1191A88524308AE900E21740 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		1191A88724308D8A00E21740 /* MyGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsTableViewController.swift; sourceTree = "<group>"; };
 		11C9F192246F30C400FC083B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -114,7 +124,7 @@
 		11003E392461FA3A00E800AC /* Networks */ = {
 			isa = PBXGroup;
 			children = (
-				1139E99224939E2300869F49 /* Mapping JSON */,
+				1139E99224939E2300869F49 /* Pharse Data */,
 				1139E98E2490DB9A00869F49 /* Alamofire */,
 			);
 			path = Networks;
@@ -161,6 +171,7 @@
 		11188104242A051B00808D44 /* KosolapovNikita */ = {
 			isa = PBXGroup;
 			children = (
+				1185350624D5C35D00FA569A /* Operation */,
 				112D4D7824A8C1DC00CF629F /* Extensions */,
 				112DC43524683E9F00DBD0F7 /* Main */,
 				1191A88C243092B500E21740 /* Groups */,
@@ -187,7 +198,7 @@
 		112DC43524683E9F00DBD0F7 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				1139E9502486CC2A00869F49 /* GoogleService-Info.plist */,
+				1185350024D1EFD100FA569A /* GoogleService-Info.plist */,
 				11188113242A051D00808D44 /* Info.plist */,
 				11188105242A051B00808D44 /* AppDelegate.swift */,
 				1118810B242A051C00808D44 /* Main.storyboard */,
@@ -249,7 +260,7 @@
 			path = Databases;
 			sourceTree = "<group>";
 		};
-		1139E99224939E2300869F49 /* Mapping JSON */ = {
+		1139E99224939E2300869F49 /* Pharse Data */ = {
 			isa = PBXGroup;
 			children = (
 				1139E9902490DD3000869F49 /* AllGroup.swift */,
@@ -260,7 +271,7 @@
 				1139E9932493A24200869F49 /* News.swift */,
 				113769E424A100810014635A /* Profiles.swift */,
 			);
-			path = "Mapping JSON";
+			path = "Pharse Data";
 			sourceTree = "<group>";
 		};
 		116FAD212452D59D004AF850 /* CustomNavigationController */ = {
@@ -272,6 +283,18 @@
 				116FAD1B2450503B004AF850 /* CustomPopAnimator.swift */,
 			);
 			path = CustomNavigationController;
+			sourceTree = "<group>";
+		};
+		1185350624D5C35D00FA569A /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				1185350224D5B3FE00FA569A /* AsyncOperation.swift */,
+				1185350424D5BE0400FA569A /* GetDataOperation.swift */,
+				1185350924D5C5D900FA569A /* ParseDataOperation.swift */,
+				1185350B24D5CB7700FA569A /* SaveToRealmOperation.swift */,
+				1185350724D5C3A400FA569A /* ReloadTableViewOperation.swift */,
+			);
+			path = Operation;
 			sourceTree = "<group>";
 		};
 		1191A88B2430928800E21740 /* Friends */ = {
@@ -391,10 +414,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				11188112242A051D00808D44 /* LaunchScreen.storyboard in Resources */,
+				1185350124D1EFD100FA569A /* GoogleService-Info.plist in Resources */,
 				1139E97C2490004200869F49 /* MyFriendsTableViewCell.xib in Resources */,
 				1139E9802490151300869F49 /* MyGroupsTableViewCell.xib in Resources */,
 				1118810F242A051D00808D44 /* Assets.xcassets in Resources */,
-				1139E9512486CC2A00869F49 /* GoogleService-Info.plist in Resources */,
 				1117814324427D01006B3A3D /* NewsTableViewCell.xib in Resources */,
 				1118810D242A051C00808D44 /* Main.storyboard in Resources */,
 				1139E9892490D06900869F49 /* AllGroupsTableViewCell.xib in Resources */,
@@ -459,27 +482,32 @@
 				116DAA54246CAA9F00007396 /* MyGroup.swift in Sources */,
 				1139E953248948B800869F49 /* FirebaseGroup.swift in Sources */,
 				11ECCB342435E567007C6A90 /* ButtonAndCounterControl.swift in Sources */,
-				113769E524A100810014635A /* Profiles.swift in Sources */,
 				1139E9942493A24200869F49 /* News.swift in Sources */,
 				116FAD1E24505115004AF850 /* CustomNavigationController.swift in Sources */,
 				11ECCB402437AE47007C6A90 /* CircleImageWithShadowView.swift in Sources */,
 				1191A88824308D8A00E21740 /* MyGroupsTableViewController.swift in Sources */,
+				1185350A24D5C5D900FA569A /* ParseDataOperation.swift in Sources */,
 				11C9F1952477186600FC083B /* ResponseGeneric.swift in Sources */,
 				11CA7EA0246AD83400735151 /* Session.swift in Sources */,
 				116FAD1A24504D3F004AF850 /* CustomPushAnimator.swift in Sources */,
 				1191A88624308AE900E21740 /* PhotoViewController.swift in Sources */,
 				1139E9882490D06900869F49 /* AllGroupsTableViewCell.swift in Sources */,
+				1185350524D5BE0400FA569A /* GetDataOperation.swift in Sources */,
 				1139E98B2490D1AF00869F49 /* AllGroupsTableViewController.swift in Sources */,
 				11188106242A051B00808D44 /* AppDelegate.swift in Sources */,
 				116FAD252454201E004AF850 /* PhotoCollectionViewCell.swift in Sources */,
 				116FAD1824463A4D004AF850 /* AnimationViewController.swift in Sources */,
+				1185350C24D5CB7700FA569A /* SaveToRealmOperation.swift in Sources */,
 				116FAD2024505D65004AF850 /* CustomInteractiveTransition.swift in Sources */,
 				116FAD2724542A20004AF850 /* SelectedPhotoViewController.swift in Sources */,
 				11003E3B2461FA6900E800AC /* MakeRequest.swift in Sources */,
 				1117814224427D01006B3A3D /* NewsTableViewCell.swift in Sources */,
 				1117813F24427CC2006B3A3D /* NewsViewController.swift in Sources */,
+				1185350324D5B3FE00FA569A /* AsyncOperation.swift in Sources */,
 				11C9F1992484EE8F00FC083B /* MyGroupsTableViewCell.swift in Sources */,
 				1139E9912490DD3000869F49 /* AllGroup.swift in Sources */,
+				113B19A624D68E6A00A9AF30 /* Profiles.swift in Sources */,
+				1185350824D5C3A400FA569A /* ReloadTableViewOperation.swift in Sources */,
 				112D4D7A24A8C22600CF629F /* UIImageViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

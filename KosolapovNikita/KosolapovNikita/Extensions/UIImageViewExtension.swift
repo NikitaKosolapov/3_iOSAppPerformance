@@ -10,16 +10,10 @@ extension UIImageView {
         
         let url = URL(string: urlString)
         self.image = nil
-//        addSpinner()
-        
-//        if let task = task {
-//            task.cancel()
-//        }
         
         // check cached image
         if let cachedImage = imageCache.object(forKey: urlString as NSString) as? UIImage {
             self.image = cachedImage
-//            self.removeSpinner()
             return
         }
         
@@ -34,21 +28,8 @@ extension UIImageView {
                 if let image = UIImage(data: data!) {
                     imageCache.setObject(image, forKey: urlString as NSString)
                     self?.image = image
-//                    self.removeSpinner()
                 }
             }
         }).resume()
     }
-    
-//    func addSpinner() {
-//        addSubview(spinner)
-//        spinner.translatesAutoresizingMaskIntoConstraints = false
-//        spinner.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        spinner.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//        spinner.startAnimating()
-//    }
-//
-//    func removeSpinner() {
-//        spinner.removeFromSuperview()
-//    }
 }
