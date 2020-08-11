@@ -80,7 +80,6 @@ extension PhotoController: UICollectionViewDataSource {
             if let selectedIndexPathRow = collectionView?.indexPathsForSelectedItems?.first?.row { // get indexPath for selected item
                 if let photoDetailViewController = segue.destination as? SelectedPhotoViewController { // get link to photoDetailViewController
                     photoDetailViewController.currentPhotoNumber = selectedIndexPathRow // set current photo number into photoDetailViewController
-                    photoDetailViewController.profileImages = profileImages
                 }
             }
         }

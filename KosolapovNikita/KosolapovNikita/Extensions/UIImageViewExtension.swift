@@ -2,7 +2,6 @@ import UIKit
 
 let imageCache = NSCache<NSString, AnyObject>()
 var task: URLSessionTask!
-let spinner = UIActivityIndicatorView(style: .medium)
 
 extension UIImageView {
     
