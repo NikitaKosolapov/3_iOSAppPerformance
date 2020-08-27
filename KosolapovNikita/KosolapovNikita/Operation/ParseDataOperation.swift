@@ -25,7 +25,6 @@ class ParseData: Operation {
                 return User(id: id,  photo: photo, firstName: firstName, lastName: lastName)
             }
             outputData = users
-            print(outputData)
         }
     }
 }

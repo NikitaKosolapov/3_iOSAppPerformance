@@ -118,8 +118,6 @@ class MakeRequest {
     func saveData<T: Object & Decodable>(_ arrayOfObjects: [T]){
         do {
             let realm = try Realm()
-            //            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-            //            let realm = try Realm(configuration: config)
             let oldObject = realm.objects(T.self)
             realm.beginWrite()
             realm.delete(oldObject)

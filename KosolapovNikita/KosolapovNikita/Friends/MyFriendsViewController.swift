@@ -17,7 +17,6 @@ class MyFriendsViewController: UIViewController {
     
     // Realm properties
     var token: NotificationToken?
-    //    var users: Results<User>?
     var users = [User]()
     let queue = OperationQueue()
     
@@ -46,11 +45,9 @@ class MyFriendsViewController: UIViewController {
         let initialUrl = "https://api.vk.com/method" // define initial url
         let accessToken = Session.shared.token // get current token
         
-        
         let parameters: Parameters = ["access_token": accessToken, "fields": "photo_200", "v": 5.103]
         let path = "/friends.get"
         let url = initialUrl + path
-        
         
         let request =  AF.request(url, method: .get, parameters: parameters)
         
@@ -69,29 +66,9 @@ class MyFriendsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
-        
-        // Observe for users in a Realm
-        //        pairTableWithRealm()
+
     }
     
-//        func pairTableWithRealm() {
-//
-//            guard let realm = try? Realm() else { return }
-//            users = realm.objects(User.self)
-//
-//            token = users.observe { [weak self] (changes: RealmCollectionChange) in
-//                switch changes {
-//                case .initial:
-//                    break
-//                case .update(let friends, _, _, _):
-//                    self?.handleFriends(friends: friends)
-//                case .error(let error):
-//                    fatalError("\(error)")
-//                }
-//            }
-//        }
-    
-    //    func handleFriends(friends: Results<User>) {
     func handleFriends(users: [User]) {
         
         guard let tableView = self.tableView else { return }
