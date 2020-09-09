@@ -61,6 +61,9 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.7.1):
     - GoogleUtilities/Logger
+  - Kingfisher (5.15.0):
+    - Kingfisher/Core (= 5.15.0)
+  - Kingfisher/Core (5.15.0)
   - leveldb-library (1.22)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
@@ -89,6 +92,7 @@ DEPENDENCIES:
   - Alamofire (~> 5.1)
   - Firebase/Core
   - Firebase/Database
+  - Kingfisher (~> 5.0)
   - PromiseKit (~> 6.8)
   - RealmSwift
   - SwiftKeychainWrapper (~> 3.4)
@@ -106,6 +110,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - Kingfisher
     - leveldb-library
     - nanopb
     - PromiseKit
@@ -126,6 +131,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 345d365fd105e6682bf5084783a5352a3db26820
   GoogleDataTransport: af0c79193dc59acd37630b4833d0dc6912ae6bd5
   GoogleUtilities: e121a3867449ce16b0e35ddf1797ea7a389ffdf2
+  Kingfisher: 1acb67597a520c2d0310677e66d6e0af455ef757
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
@@ -135,6 +141,6 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 2c4fde8ddaa0994d0933c1ceb30990f233b4aa25
+PODFILE CHECKSUM: 35d9051d47c959cf85b79f0f95fff86b86453697
 
 COCOAPODS: 1.9.1
