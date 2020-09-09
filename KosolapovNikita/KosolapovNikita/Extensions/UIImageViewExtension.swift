@@ -7,7 +7,7 @@ extension UIImageView {
     
     func loadImageUsingCache(withUrl urlString : String) {
         
-        let url = URL(string: urlString)
+        guard let url = URL(string: urlString) else { return }
         self.image = nil
         
         // check cached image
@@ -17,7 +17,7 @@ extension UIImageView {
         }
         
         // if not, download image from url
-        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             if error != nil {
                 print(error!)
                 return
