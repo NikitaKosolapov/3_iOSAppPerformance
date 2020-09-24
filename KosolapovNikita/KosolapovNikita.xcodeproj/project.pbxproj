@@ -121,13 +121,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		11003E392461FA3A00E800AC /* Networks */ = {
+		11003E392461FA3A00E800AC /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				11A0C87F2519DB14004C8C14 /* Request */,
 				1139E99224939E2300869F49 /* Pharse Data */,
-				1139E98E2490DB9A00869F49 /* Alamofire */,
 			);
-			path = Networks;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		11003E3C24654F1200E800AC /* Login */ = {
@@ -181,7 +181,7 @@
 				11AA36B524321920006135AF /* ProfilePhotos */,
 				1191A88B2430928800E21740 /* Friends */,
 				1139E98F2490DBC900869F49 /* Databases */,
-				11003E392461FA3A00E800AC /* Networks */,
+				11003E392461FA3A00E800AC /* Networking */,
 				11ECCB302435E035007C6A90 /* CustomComponents */,
 			);
 			path = KosolapovNikita;
@@ -242,14 +242,6 @@
 				1139E952248948B800869F49 /* FirebaseGroup.swift */,
 			);
 			path = Firebase;
-			sourceTree = "<group>";
-		};
-		1139E98E2490DB9A00869F49 /* Alamofire */ = {
-			isa = PBXGroup;
-			children = (
-				11003E3A2461FA6900E800AC /* MakeRequest.swift */,
-			);
-			path = Alamofire;
 			sourceTree = "<group>";
 		};
 		1139E98F2490DBC900869F49 /* Databases */ = {
@@ -314,6 +306,14 @@
 				1139E9822490D01300869F49 /* MyGroups */,
 			);
 			path = Groups;
+			sourceTree = "<group>";
+		};
+		11A0C87F2519DB14004C8C14 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				11003E3A2461FA6900E800AC /* MakeRequest.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		11AA36B524321920006135AF /* ProfilePhotos */ = {

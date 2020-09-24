@@ -16,6 +16,14 @@ struct NewsItems: Codable {
     let items: [News]
     let profiles: [Profiles]
     let groups: [AllGroup]
+    let nextFrom: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case items
+        case profiles
+        case groups
+        case nextFrom = "next_from"
+    }
 }
 
 struct News: Codable {

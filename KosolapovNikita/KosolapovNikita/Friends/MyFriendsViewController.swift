@@ -70,12 +70,12 @@ class MyFriendsViewController: UIViewController {
     }
     
     func handleFriends(users: [User]) {
-        
+
         guard let tableView = self.tableView else { return }
-        
+
         // Sort users by last name
         sortedUsers = users.sorted{$0.lastName < $1.lastName}
-        
+
         // Get array of friends in alphabetical order
         for user in sortedUsers {
             if firstLettersOfNames.contains(user.lastName.first!) {

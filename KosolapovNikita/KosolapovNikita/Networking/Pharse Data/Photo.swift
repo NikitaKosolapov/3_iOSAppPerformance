@@ -23,6 +23,9 @@ class Photo: Object, Decodable {
     @objc dynamic var text = String()
     @objc dynamic var likes = Int()
     @objc dynamic var reposts = Int()
+    @objc dynamic var height = Int()
+    @objc dynamic var width = Int()
+    @objc dynamic var aspectRatio: CGFloat { return CGFloat(height)/CGFloat(width)}
     
     enum ItemKeys: String, CodingKey {
         case sizes
@@ -33,6 +36,8 @@ class Photo: Object, Decodable {
     
     enum SizesKeys: String, CodingKey {
         case url
+        case height
+        case width
     }
     
     enum LikesKeys: String, CodingKey {
@@ -57,13 +62,19 @@ class Photo: Object, Decodable {
         // Url
         var nestedUnkeyedSizesContainer = try itemContainer.nestedUnkeyedContainer(forKey: .sizes)
         var urlArray = [String]()
+        var heightArray = [Int]()
+        var widthArray = [Int]()
         
         // Get needed size
         while !nestedUnkeyedSizesContainer.isAtEnd {
             let nestedSizesContainer = try nestedUnkeyedSizesContainer.nestedContainer(keyedBy: SizesKeys.self)
             urlArray.append(try nestedSizesContainer.decode(String.self, forKey: .url))
+            heightArray.append(try nestedSizesContainer.decode(Int.self, forKey: .height))
+            widthArray.append(try nestedSizesContainer.decode(Int.self, forKey: .width))
         }
         self.url = urlArray.last!
+        self.height = heightArray.last!
+        self.width = widthArray.last!
         
         // Likes
         let nestedLikesContainer = try itemContainer.nestedContainer(keyedBy: LikesKeys.self, forKey: .likes)
