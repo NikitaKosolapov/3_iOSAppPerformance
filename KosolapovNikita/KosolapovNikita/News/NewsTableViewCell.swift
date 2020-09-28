@@ -19,6 +19,14 @@ import UIKit
     @IBOutlet private weak var commentControl: ButtonAndCounterControl!
     @IBOutlet private weak var repostsControl: ButtonAndCounterControl!
     
+    lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeZone = .current
+        return dateFormatter
+    }()
+    
     private var attachments: Attachments?
     
     func configure(news: News, profiles: Profiles?, groups: AllGroup?) {
@@ -33,16 +41,10 @@ import UIKit
         }
         
         // Date
-        let localDate: String = {
+        self.dateLabel.text = {
             let date = Date(timeIntervalSince1970: TimeInterval(news.date))
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeStyle = .short
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeZone = .current
             return dateFormatter.string(from: date)
         }()
-        
-        self.dateLabel.text = localDate
         
         // Text description
         descriptionLabel.text = news.text
