@@ -25,6 +25,7 @@
 		1139E98B2490D1AF00869F49 /* AllGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E98A2490D1AF00869F49 /* AllGroupsTableViewController.swift */; };
 		1139E9912490DD3000869F49 /* AllGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E9902490DD3000869F49 /* AllGroup.swift */; };
 		1139E9942493A24200869F49 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E9932493A24200869F49 /* News.swift */; };
+		113A670C2521EC57004952E4 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113A670B2521EC57004952E4 /* NewsItem.swift */; };
 		113B19A624D68E6A00A9AF30 /* Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113769E424A100810014635A /* Profiles.swift */; };
 		116DAA50246CAA8800007396 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116DAA4F246CAA8800007396 /* User.swift */; };
 		116DAA54246CAA9F00007396 /* MyGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116DAA53246CAA9F00007396 /* MyGroup.swift */; };
@@ -77,6 +78,7 @@
 		1139E98A2490D1AF00869F49 /* AllGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableViewController.swift; sourceTree = "<group>"; };
 		1139E9902490DD3000869F49 /* AllGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroup.swift; sourceTree = "<group>"; };
 		1139E9932493A24200869F49 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		113A670B2521EC57004952E4 /* NewsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
 		116DAA4F246CAA8800007396 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		116DAA53246CAA9F00007396 /* MyGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroup.swift; sourceTree = "<group>"; };
 		116FAD1724463A4D004AF850 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				11C9F1942477186600FC083B /* ResponseGeneric.swift */,
 				1139E9932493A24200869F49 /* News.swift */,
 				113769E424A100810014635A /* Profiles.swift */,
+				113A670B2521EC57004952E4 /* NewsItem.swift */,
 			);
 			path = "Pharsing JSON";
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				11ECCB402437AE47007C6A90 /* CircleImageWithShadowView.swift in Sources */,
 				1191A88824308D8A00E21740 /* MyGroupsTableViewController.swift in Sources */,
 				1185350A24D5C5D900FA569A /* ParseDataOperation.swift in Sources */,
+				113A670C2521EC57004952E4 /* NewsItem.swift in Sources */,
 				11C9F1952477186600FC083B /* ResponseGeneric.swift in Sources */,
 				11CA7EA0246AD83400735151 /* Session.swift in Sources */,
 				116FAD1A24504D3F004AF850 /* CustomPushAnimator.swift in Sources */,

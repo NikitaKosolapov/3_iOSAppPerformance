@@ -25,7 +25,7 @@ class NewsViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTableViewCell")
         tableView.prefetchDataSource = self
-        tableView.delegate = self
+//        tableView.delegate = self
         
         setupRefreshControl()
         
@@ -122,16 +122,16 @@ extension NewsViewController: UITableViewDataSourcePrefetching {
     }
 }
 
-extension NewsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 2:
-            let tableWidth = tableView.bounds.width
-            let news = self.allNews![indexPath.row]
-            let cellHeight = tableWidth * news.attachments
-            return cellHeight
-        default:
-            return UITableView.automaticDimension
-        }
-    }
-}
+//extension NewsViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        switch indexPath.row {
+//        case 2:
+//            let tableWidth = tableView.bounds.width
+//            let news = self.allNews![indexPath.row]
+//            let cellHeight = tableWidth * news.attachments
+//            return cellHeight
+//        default:
+//            return UITableView.automaticDimension
+//        }
+//    }
+//}
