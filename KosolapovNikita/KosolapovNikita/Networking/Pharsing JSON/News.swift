@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct NewsResponse: Codable {
     let response: NewsItems
@@ -100,6 +101,5 @@ struct  Likes: Codable {
 struct Reposts: Codable {
     let count: Int
 }
-
 
 

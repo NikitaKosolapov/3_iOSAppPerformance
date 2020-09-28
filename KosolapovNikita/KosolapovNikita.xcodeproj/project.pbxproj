@@ -125,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				11A0C87F2519DB14004C8C14 /* Request */,
-				1139E99224939E2300869F49 /* Pharse Data */,
+				1139E99224939E2300869F49 /* Pharsing JSON */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -252,7 +252,7 @@
 			path = Databases;
 			sourceTree = "<group>";
 		};
-		1139E99224939E2300869F49 /* Pharse Data */ = {
+		1139E99224939E2300869F49 /* Pharsing JSON */ = {
 			isa = PBXGroup;
 			children = (
 				1139E9902490DD3000869F49 /* AllGroup.swift */,
@@ -263,7 +263,7 @@
 				1139E9932493A24200869F49 /* News.swift */,
 				113769E424A100810014635A /* Profiles.swift */,
 			);
-			path = "Pharse Data";
+			path = "Pharsing JSON";
 			sourceTree = "<group>";
 		};
 		116FAD212452D59D004AF850 /* CustomNavigationController */ = {
