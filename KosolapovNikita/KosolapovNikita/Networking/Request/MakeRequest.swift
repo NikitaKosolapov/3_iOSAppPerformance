@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import RealmSwift
+import SwiftyJSON
 
 class MakeRequest {
     
@@ -94,7 +95,34 @@ extension MakeRequest {
         }
     }
     
-    func getNews(startTime: Double? = nil, startFrom: String = "", completion: @escaping (NewsResponse?, String?) -> Void) {
+    // func getNews(startTime: Double? = nil, startFrom: String = "", completion: @escaping (NewsResponse?, String?) -> Void) {
+    //      var parameters: Parameters = ["access_token": Session.shared.token,
+    //                                    "filters": "post",
+    //                                    "count": "10",
+    //                                    "v": "5.58",
+    //                                    "start_from": startFrom]
+    //      let path = "/newsfeed.get"
+    //      let url = initialUrl + path
+    //
+    //      if let startTime = startTime {
+    //          parameters["start_time"] = startTime
+    //      }
+    //
+    //      DispatchQueue.global().async {
+    //          AF.request(url, method: .get, parameters: parameters).responseData { response in
+    //              guard let data = response.value else { return }
+    //              do {
+    //                  let decoder = JSONDecoder()
+    //                  let decodedResponse = try decoder.decode(NewsResponse.self, from: data)
+    //                  completion(decodedResponse, decodedResponse.response.nextFrom)
+    //              } catch {
+    //                  print(error)
+    //              }
+    //          }
+    //      }
+    //  }
+    
+    func getNews(startTime: Date? = nil, startFrom: String = "", completion: @escaping ([NewsItem], String?) -> Void) {
         var parameters: Parameters = ["access_token": Session.shared.token,
                                       "filters": "post",
                                       "count": "10",
@@ -109,18 +137,43 @@ extension MakeRequest {
         
         DispatchQueue.global().async {
             AF.request(url, method: .get, parameters: parameters).responseData { response in
-                guard let data = response.value else { return }
-                do {
-                    let decoder = JSONDecoder()
-                    let decodedResponse = try decoder.decode(NewsResponse.self, from: data)
-                    completion(decodedResponse, decodedResponse.response.nextFrom)
-                } catch {
+                var news: [NewsItem] = []
+                
+                switch response.result {
+                    
+                case .success(let value):
+                    let json = JSON(value)
+                    news = self.parseNews(json)
+                    
+                    DispatchQueue.main.async {
+                        completion(news, "")
+                    }
+                    
+                case .failure(let error):
                     print(error)
                 }
             }
         }
     }
     
+    func parseNews(_ json: JSON) -> [NewsItem] {
+        let profiles = json["response"]["profiles"]
+            .arrayValue
+            .map{NewsItemProfile(json: $0)}
+        let groups = json["response"]["groups"]
+            .arrayValue
+            .map{NewsItemProfile(json: $0)}
+        let allProfiles = profiles + groups
+        
+        let items = json["response"]["items"]
+            .arrayValue
+            .map{NewsItem(json: $0)}
+        for (index, item) in items.enumerated() {
+            let profile = allProfiles.first(where: { abs(item.sourceId) == $0.id })
+            items[index].profile = profile
+        }
+        return items
+    }
     
     func saveData<T: Object & Decodable>(_ arrayOfObjects: [T]){
         do {
