@@ -19,71 +19,44 @@ import UIKit
     @IBOutlet private weak var commentControl: ButtonAndCounterControl!
     @IBOutlet private weak var repostsControl: ButtonAndCounterControl!
     
-    private var attachments: Attachments?
+    lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeZone = .current
+        return dateFormatter
+    }()
     
-    func configure(news: News, profiles: Profiles?, groups: AllGroup?) {
+    func configure(item: NewsItem) {
         
-        // User image and name
-        if let profiles = profiles {
-            self.userImage.imageView.loadImageUsingCache(withUrl: profiles.photo)
-            self.nameLabel.text = profiles.firstName + " " + profiles.lastName
-        } else if let groups = groups {
-            self.userImage.imageView.loadImageUsingCache(withUrl: groups.photo)
-            self.nameLabel.text = groups.name
-        }
+        // Profile image
+        self.userImage.imageView.loadImageUsingCache(withUrl: item.profile?.photoUrl ?? "")
+        
+        // Name
+        self.nameLabel.text = item.profile?.name
         
         // Date
-        let localDate: String = {
-            let date = Date(timeIntervalSince1970: TimeInterval(news.date))
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeStyle = .short
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeZone = .current
+        self.dateLabel.text = {
+            let date = item.date
             return dateFormatter.string(from: date)
         }()
         
-        self.dateLabel.text = localDate
-        
         // Text description
-        descriptionLabel.text = news.text
+        descriptionLabel.text = item.text
         
         // Photo
-        let copyHistoryAttachments = news.copyHistory?[0].attachments?[0]
-        let itemsAttachments = news.attachments?[0]
+        self.photoImageView.loadImageUsingCache(withUrl: item.photoUrl)
         
-        if (copyHistoryAttachments?.type) != nil {
-            self.attachments = copyHistoryAttachments
-        } else if (itemsAttachments?.type) != nil {
-            self.attachments = itemsAttachments
-        }
-        
-        switch attachments?.type {
-        case "photo":
-            if let urlOfPhoto = attachments?.photo?.photo {
-                self.photoImageView.loadImageUsingCache(withUrl: urlOfPhoto)
-            }
-        case "video":
-            if let urlOfPhoto = attachments?.video?.photo {
-                self.photoImageView.loadImageUsingCache(withUrl: urlOfPhoto)
-            }
-        case "album":
-            if let urlOfPhoto = attachments?.album?.thumb.photo {
-                self.photoImageView.loadImageUsingCache(withUrl: urlOfPhoto)
-            }
-        default:
-            return
-        }
-        
-        // Likes
-        self.likeControl.counter = news.likes.count
+        // Like
+        self.likeControl.counter = item.likesCount
         self.likeControl.setupView()
         
         // Comments
-        self.commentControl.counter = news.comments.count
+        self.commentControl.counter = item.commentsCount
         self.commentControl.setupView()
         
         // Reposts
-        self.repostsControl.counter = news.reposts.count
+        self.repostsControl.counter = item.repostsCount
         self.repostsControl.setupView()
     }
 }

@@ -24,8 +24,8 @@
 		1139E9892490D06900869F49 /* AllGroupsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1139E9872490D06900869F49 /* AllGroupsTableViewCell.xib */; };
 		1139E98B2490D1AF00869F49 /* AllGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E98A2490D1AF00869F49 /* AllGroupsTableViewController.swift */; };
 		1139E9912490DD3000869F49 /* AllGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E9902490DD3000869F49 /* AllGroup.swift */; };
-		1139E9942493A24200869F49 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1139E9932493A24200869F49 /* News.swift */; };
-		113B19A624D68E6A00A9AF30 /* Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113769E424A100810014635A /* Profiles.swift */; };
+		113A670C2521EC57004952E4 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113A670B2521EC57004952E4 /* NewsItem.swift */; };
+		113A670E2522330B004952E4 /* NewsItemProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113A670D2522330B004952E4 /* NewsItemProfile.swift */; };
 		116DAA50246CAA8800007396 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116DAA4F246CAA8800007396 /* User.swift */; };
 		116DAA54246CAA9F00007396 /* MyGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116DAA53246CAA9F00007396 /* MyGroup.swift */; };
 		116FAD1824463A4D004AF850 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FAD1724463A4D004AF850 /* AnimationViewController.swift */; };
@@ -68,7 +68,6 @@
 		11188111242A051D00808D44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11188113242A051D00808D44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = KosolapovNikita/Main/Info.plist; sourceTree = SOURCE_ROOT; };
 		112D4D7924A8C22600CF629F /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
-		113769E424A100810014635A /* Profiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profiles.swift; sourceTree = "<group>"; };
 		1139E952248948B800869F49 /* FirebaseGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseGroup.swift; sourceTree = "<group>"; };
 		1139E97A2490004200869F49 /* MyFriendsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyFriendsTableViewCell.xib; sourceTree = "<group>"; };
 		1139E97E2490151300869F49 /* MyGroupsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyGroupsTableViewCell.xib; sourceTree = "<group>"; };
@@ -76,7 +75,8 @@
 		1139E9872490D06900869F49 /* AllGroupsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllGroupsTableViewCell.xib; sourceTree = "<group>"; };
 		1139E98A2490D1AF00869F49 /* AllGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableViewController.swift; sourceTree = "<group>"; };
 		1139E9902490DD3000869F49 /* AllGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroup.swift; sourceTree = "<group>"; };
-		1139E9932493A24200869F49 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		113A670B2521EC57004952E4 /* NewsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
+		113A670D2522330B004952E4 /* NewsItemProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemProfile.swift; sourceTree = "<group>"; };
 		116DAA4F246CAA8800007396 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		116DAA53246CAA9F00007396 /* MyGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroup.swift; sourceTree = "<group>"; };
 		116FAD1724463A4D004AF850 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				11A0C87F2519DB14004C8C14 /* Request */,
-				1139E99224939E2300869F49 /* Pharse Data */,
+				1139E99224939E2300869F49 /* Pharsing JSON */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -252,7 +252,7 @@
 			path = Databases;
 			sourceTree = "<group>";
 		};
-		1139E99224939E2300869F49 /* Pharse Data */ = {
+		1139E99224939E2300869F49 /* Pharsing JSON */ = {
 			isa = PBXGroup;
 			children = (
 				1139E9902490DD3000869F49 /* AllGroup.swift */,
@@ -260,10 +260,10 @@
 				11C9F196247EE9E000FC083B /* Photo.swift */,
 				116DAA53246CAA9F00007396 /* MyGroup.swift */,
 				11C9F1942477186600FC083B /* ResponseGeneric.swift */,
-				1139E9932493A24200869F49 /* News.swift */,
-				113769E424A100810014635A /* Profiles.swift */,
+				113A670B2521EC57004952E4 /* NewsItem.swift */,
+				113A670D2522330B004952E4 /* NewsItemProfile.swift */,
 			);
-			path = "Pharse Data";
+			path = "Pharsing JSON";
 			sourceTree = "<group>";
 		};
 		116FAD212452D59D004AF850 /* CustomNavigationController */ = {
@@ -482,11 +482,11 @@
 				116DAA54246CAA9F00007396 /* MyGroup.swift in Sources */,
 				1139E953248948B800869F49 /* FirebaseGroup.swift in Sources */,
 				11ECCB342435E567007C6A90 /* ButtonAndCounterControl.swift in Sources */,
-				1139E9942493A24200869F49 /* News.swift in Sources */,
 				116FAD1E24505115004AF850 /* CustomNavigationController.swift in Sources */,
 				11ECCB402437AE47007C6A90 /* CircleImageWithShadowView.swift in Sources */,
 				1191A88824308D8A00E21740 /* MyGroupsTableViewController.swift in Sources */,
 				1185350A24D5C5D900FA569A /* ParseDataOperation.swift in Sources */,
+				113A670C2521EC57004952E4 /* NewsItem.swift in Sources */,
 				11C9F1952477186600FC083B /* ResponseGeneric.swift in Sources */,
 				11CA7EA0246AD83400735151 /* Session.swift in Sources */,
 				116FAD1A24504D3F004AF850 /* CustomPushAnimator.swift in Sources */,
@@ -505,8 +505,8 @@
 				1117813F24427CC2006B3A3D /* NewsViewController.swift in Sources */,
 				1185350324D5B3FE00FA569A /* AsyncOperation.swift in Sources */,
 				11C9F1992484EE8F00FC083B /* MyGroupsTableViewCell.swift in Sources */,
+				113A670E2522330B004952E4 /* NewsItemProfile.swift in Sources */,
 				1139E9912490DD3000869F49 /* AllGroup.swift in Sources */,
-				113B19A624D68E6A00A9AF30 /* Profiles.swift in Sources */,
 				1185350824D5C3A400FA569A /* ReloadTableViewOperation.swift in Sources */,
 				112D4D7A24A8C22600CF629F /* UIImageViewExtension.swift in Sources */,
 			);
@@ -655,7 +655,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RTLGBYJM5X;
-				INFOPLIST_FILE = /Users/Nikita/Desktop/Programming/Courses/GB_Swift/2_ClientserverApplications/Homeworks/KosolapovNikita/KosolapovNikita/Main/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/KosolapovNikita/Main/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -676,7 +676,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RTLGBYJM5X;
-				INFOPLIST_FILE = /Users/Nikita/Desktop/Programming/Courses/GB_Swift/2_ClientserverApplications/Homeworks/KosolapovNikita/KosolapovNikita/Main/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/KosolapovNikita/Main/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
