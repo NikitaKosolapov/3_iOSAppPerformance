@@ -17,7 +17,8 @@ class MyFriendsViewController: UIViewController {
     
     // Realm properties
     var token: NotificationToken?
-    var users: Results<User>?
+    var users = [User]()
+    let queue = OperationQueue()
     
     // Processed values
     var sortedUsers = [User]()
@@ -39,43 +40,42 @@ class MyFriendsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(UINib(nibName: "MyFriendsTableViewCell", bundle: nil), forCellReuseIdentifier: "MyFriendsTableViewCell")
+        
+        let initialUrl = "https://api.vk.com/method" // define initial url
+        let accessToken = Session.shared.token // get current token
+        
+        let parameters: Parameters = ["access_token": accessToken, "fields": "photo_200", "v": 5.103]
+        let path = "/friends.get"
+        let url = initialUrl + path
+        
+        let request =  AF.request(url, method: .get, parameters: parameters)
+        
+        let getDataOperation = GetDataOperation(request: request)
+        let parseData = ParseData()
+        let reloadTable = ReloadTableViewController(controller: self)
+        
+        parseData.addDependency(getDataOperation)
+        reloadTable.addDependency(parseData)
+        
+        queue.addOperation(getDataOperation)
+        queue.addOperation(parseData)
+        queue.addOperation(reloadTable)
+        
         // Define delegates of table view and search bar
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
-        
-        tableView.register(UINib(nibName: "MyFriendsTableViewCell", bundle: nil), forCellReuseIdentifier: "MyFriendsTableViewCell")
-        
-        // Observe for users in a Realm
-        pairTableWithRealm()
-        
-        // Get users from a server
-        MakeRequest.shared.getMyFriendsList()
+
     }
     
-    func pairTableWithRealm() {
-        guard let realm = try? Realm() else { return }
-        users = realm.objects(User.self)
-        
-        token = users!.observe { [weak self] (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial:
-                break
-            case .update(let friends, _, _, _):
-                self?.handleFriends(friends: friends)
-            case .error(let error):
-                fatalError("\(error)")
-            }
-        }
-    }
-    
-    func handleFriends(friends: Results<User>) {
-        
+    func handleFriends(users: [User]) {
+
         guard let tableView = self.tableView else { return }
-        
+
         // Sort users by last name
-        sortedUsers = friends.sorted{$0.lastName < $1.lastName}
-        
+        sortedUsers = users.sorted{$0.lastName < $1.lastName}
+
         // Get array of friends in alphabetical order
         for user in sortedUsers {
             if firstLettersOfNames.contains(user.lastName.first!) {
@@ -85,7 +85,9 @@ class MyFriendsViewController: UIViewController {
                 usersInAlphabeticalOrder.append([user])
             }
         }
-        tableView.reloadData()
+        DispatchQueue.main.async {
+         tableView.reloadData()
+        }
     }
 }
 
@@ -113,22 +115,28 @@ extension MyFriendsViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsTableViewCell", for: indexPath) as! MyFriendsTableViewCell// declare cell
         
-        // Animation of appearance of cells and userImages
-        cell.userImage.alpha = 0
+        // Define interactive animator
         
-        UIView.animate(withDuration: 1,
-                       animations: {
-                        cell.userImage.alpha = 1
+        cell.userImageView.alpha = 0
+        
+        let interactiveAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear, animations: {
+            
+            UIView.animate(withDuration: 1,
+                           delay: 0.1,
+                           usingSpringWithDamping: 0.6,
+                           initialSpringVelocity: 0.6,
+                           options: [],
+                           animations: {
+                            cell.frame.origin.x -= 100
+            })
         })
         
         UIView.animate(withDuration: 1,
-                       delay: 0.1,
-                       usingSpringWithDamping: 0.6,
-                       initialSpringVelocity: 0.6,
-                       options: [],
                        animations: {
-                        cell.frame.origin.x -= 100
+                        cell.userImageView.alpha = 1
         })
+        
+        interactiveAnimator.startAnimation()
         
         // Configurate cells
         var user: User
@@ -141,21 +149,8 @@ extension MyFriendsViewController: UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        // Set user's name to the cell
-        cell.userName.text = user.lastName + " " + user.firstName
+        cell.configure(user: user)
         
-        // Set user's image to the cell
-        if let imageUrl = URL(string: user.avatarUrl) {
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: imageUrl)
-                if let data = data {
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        cell.userImage.imageView.image = image
-                    }
-                }
-            }
-        }
         return cell
     }
     
@@ -166,8 +161,6 @@ extension MyFriendsViewController: UITableViewDataSource {
             return "\(self.firstLettersOfNames[section])"
         }
     }
-    
-
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowProfilePhotos" { // check segue identifier
@@ -215,7 +208,7 @@ extension MyFriendsViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredUsers = users!.filter({(user: User) in
+        filteredUsers = users.filter({(user: User) in
             return user.lastName.lowercased().contains(searchText.lowercased())
         })
         if(filteredUsers.count == 0){

@@ -13,8 +13,8 @@ import FirebaseDatabase
 
 class MyGroupsController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
     let user = [FirebaseGroup]()
     let ref = Database.database().reference(withPath: "user")
@@ -86,20 +86,9 @@ extension MyGroupsController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroupsTableViewCell", for: indexPath) as! MyGroupsTableViewCell
         
-        // Set user's image to the cell
-        if let imageUrl = URL(string: groups![indexPath.row].photo200) {
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: imageUrl)
-                if let data = data {
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        cell.groupImage?.imageView.image = image
-                    }
-                }
-            }
-        }
-        // Set title to the cell
-        cell.groupName?.text = groups?[indexPath.row].name
+        guard let group = groups?[indexPath.row] else { return UITableViewCell() }
+        
+        cell.configure(myGroup: group)
         
         return cell
     }

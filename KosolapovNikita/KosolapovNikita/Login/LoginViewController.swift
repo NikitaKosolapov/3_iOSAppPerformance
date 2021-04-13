@@ -14,8 +14,8 @@ import Alamofire
 // Define ViewController
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var scrollBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var webView: WKWebView! {
         didSet {
@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
             urlComponents.scheme = "http"
             urlComponents.host = "oauth.vk.com"
             urlComponents.path = "/authorize"
-            urlComponents.queryItems = [URLQueryItem(name: "client_id", value: "7494123"),
+            urlComponents.queryItems = [URLQueryItem(name: "client_id", value: "7450792"),
                                         URLQueryItem(name: "display", value: "mobile"),
                                         URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
                                         URLQueryItem(name: "scope", value: "262150, wall, friends"),

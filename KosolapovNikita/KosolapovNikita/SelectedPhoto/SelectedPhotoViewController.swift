@@ -10,9 +10,9 @@ import RealmSwift
 
 class SelectedPhotoViewController: UIViewController {
     
-    @IBOutlet weak var currentPhotoView: UIImageView! // Setup selected photo
-    @IBOutlet weak var nextPhoto: UIImageView! // Calculated value
-    @IBOutlet weak var likeControl: ButtonAndCounterControl! // Animated like counter
+    @IBOutlet private weak var currentImageView: UIImageView! // Setup selected photo
+    @IBOutlet private weak var nextImageView: UIImageView! // Calculated value
+    @IBOutlet private weak var likeControl: ButtonAndCounterControl! // Animated like counter
     
     var photos: Results<Photo>?
     var profileImages = [UIImage]()
@@ -28,8 +28,15 @@ class SelectedPhotoViewController: UIViewController {
         panObserver()
         tapObserver()
         
+        // Pair ViewController with Realm
+        guard let realm = try? Realm() else { return }
+        photos = realm.objects(Photo.self)
+        
+        
         // Setup currentPhotoView
-        currentPhotoView.image = profileImages[currentPhotoNumber]
+        if let url = photos?[currentPhotoNumber].url {
+            currentImageView.loadImageUsingCache(withUrl: url)
+        }
     }
     
     // MARK: Observe for pan
@@ -49,18 +56,19 @@ class SelectedPhotoViewController: UIViewController {
             
         case .began:
             
+            guard let photos = photos else { return }
             initialTouchPoint = touchPoint // Define initial touch point as touch point
             
             // Left and right swipe
             if velocity.x < 0 { // From right to left
                 
-                guard profileImages.indices.contains(currentPhotoNumber + 1) else { return }
+                guard photos.indices.contains(currentPhotoNumber + 1) else { return }
                 setupNextPhoto(nextOrPrevious: 1, offset: view.bounds.width)
                 setupInteractiveAnimator(translationX: -view.bounds.width, currentPhotoNumber: 1)
                 
             } else if velocity.x > 0 { // From left to right
                 
-                guard profileImages.indices.contains(currentPhotoNumber - 1) else { return }
+                guard photos.indices.contains(currentPhotoNumber - 1) else { return }
                 setupNextPhoto(nextOrPrevious: -1, offset: -view.bounds.width)
                 setupInteractiveAnimator(translationX: view.bounds.width, currentPhotoNumber: -1)
                 
@@ -106,7 +114,6 @@ class SelectedPhotoViewController: UIViewController {
             } else  {
                 interactiveAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
             }
-            
         default:
             return
         }
@@ -126,16 +133,21 @@ class SelectedPhotoViewController: UIViewController {
     
     // MARK: Change names of images views
     func nextPhotoEqualsCurrentPhoto() { // The next photo that changes the current photo becomes the current photo
-        let tmp = nextPhoto
-        nextPhoto = currentPhotoView
-        currentPhotoView = tmp
+        let tmp = nextImageView
+        nextImageView = currentImageView
+        currentImageView = tmp
     }
     
     // MARK: Setup next or previous photo
     func setupNextPhoto(nextOrPrevious: Int, offset: CGFloat) {
-        guard profileImages.indices.contains(currentPhotoNumber + nextOrPrevious) else { return } // check up of error: index out of range
-        nextPhoto.image = profileImages[currentPhotoNumber + nextOrPrevious]
-        nextPhoto.transform = CGAffineTransform(translationX: offset, y: 0)
+        guard let photos = photos else { return }
+        guard photos.indices.contains(currentPhotoNumber + nextOrPrevious) else { return } // check up of error: index out of range
+        
+        let url = photos[currentPhotoNumber + nextOrPrevious].url
+        nextImageView.loadImageUsingCache(withUrl: url)
+        
+//        nextImageView.image = photos[currentPhotoNumber + nextOrPrevious]
+        nextImageView.transform = CGAffineTransform(translationX: offset, y: 0)
     }
     
     // MARK: Setup animation for photos
@@ -143,14 +155,15 @@ class SelectedPhotoViewController: UIViewController {
         UIView.animate(withDuration: 0.1,
                        delay: 0,
                        animations: {
-                        self.currentPhotoView.transform = CGAffineTransform(translationX: translationX, y: 0) // depends on swipe direction
+                        self.currentImageView.transform = CGAffineTransform(translationX: translationX, y: 0) // depends on swipe direction
         })
         UIView.animate(withDuration: 0.4,
                        delay: 0.2,
                        animations: {
-                        self.nextPhoto.transform = .identity
+                        self.nextImageView.transform = .identity
         })
     }
+    
     // MARK: Setup interativeAnimator
     func setupInteractiveAnimator(translationX: CGFloat, currentPhotoNumber: Int) {
         interactiveAnimator.addAnimations {

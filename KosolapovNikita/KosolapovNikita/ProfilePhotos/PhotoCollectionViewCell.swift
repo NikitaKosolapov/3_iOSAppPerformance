@@ -10,6 +10,10 @@ import UIKit
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var photoImageView: UIImageView!
     
+    func configure(image: Photo) {
+        let url = image.url
+        self.photoImageView.loadImageUsingCache(withUrl: url)
+    }
 }
