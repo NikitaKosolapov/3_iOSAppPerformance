@@ -24,16 +24,18 @@ class MakeRequest {
         let path = "/friends.get"
         let url = initialUrl + path
         
-        AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
-            guard let data = response.value else { return }
-            do {
-                let decoder = JSONDecoder()
-                let decodedResponse = try decoder.decode(MainUserResponse.self, from: data).response.items
-                self?.saveData(decodedResponse)
-            } catch {
-                print(error)
+        
+            AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
+                guard let data = response.value else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedResponse = try decoder.decode(MainUserResponse.self, from: data).response.items
+                    self?.saveData(decodedResponse)
+                } catch {
+                    print(error)
+                }
             }
-        }
+        
     }
     
     func getPhotosOfSelectedFriend(ownerId: Int) {
@@ -41,16 +43,18 @@ class MakeRequest {
         let path = "/photos.get"
         let url = initialUrl + path
         
-        AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
-            guard let data = response.value else { return }
-            do {
-                let decoder = JSONDecoder()
-                let decodedResponse = try decoder.decode(MainPhotosResponse.self, from: data).response.items
-                self?.saveData(decodedResponse)
-            } catch {
-                print(error)
+        
+            AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
+                guard let data = response.value else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedResponse = try decoder.decode(MainPhotosResponse.self, from: data).response.items
+                    self?.saveData(decodedResponse)
+                } catch {
+                    print(error)
+                }
             }
-        }
+        
     }
     
     func getMyGroupsList() {
@@ -58,16 +62,18 @@ class MakeRequest {
         let path = "/groups.get"
         let url = initialUrl + path
         
-        AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
-            guard let data = response.value else { return }
-            do {
-                let decoder = JSONDecoder()
-                let decodedResponse = try decoder.decode(MainMyGroupsResponse.self, from: data).response.items
-                self?.saveData(decodedResponse)
-            } catch {
-                print(error)
+        
+            AF.request(url, method: .get, parameters: parameters).responseData { [weak self] response in
+                guard let data = response.value else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedResponse = try decoder.decode(MainMyGroupsResponse.self, from: data).response.items
+                    self?.saveData(decodedResponse)
+                } catch {
+                    print(error)
+                }
             }
-        }
+        
     }
     
     func getAllGroupsList(request: String, completion: @escaping ([AllGroup]) -> Void) {
@@ -75,17 +81,18 @@ class MakeRequest {
         let path = "/groups.search"
         let url = initialUrl + path
         
-        AF.request(url, method: .get, parameters: parameters).responseData { response in
-            
-            guard let data = response.value else { return }
-            do {
-                let decoder = JSONDecoder()
-                let decodedResponse = try decoder.decode(AllGroupsResponse.self, from: data).response.items
-                completion(decodedResponse)
-            } catch {
-                print(error)
+        
+            AF.request(url, method: .get, parameters: parameters).responseData { response in
+                guard let data = response.value else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedResponse = try decoder.decode(AllGroupsResponse.self, from: data).response.items
+                    completion(decodedResponse)
+                } catch {
+                    print(error)
+                }
             }
-        }
+        
     }
     
     func getNews(completion: @escaping (NewsResponse?) -> Void) {
@@ -93,23 +100,25 @@ class MakeRequest {
         let path = "/newsfeed.get"
         let url = initialUrl + path
         
-        AF.request(url, method: .get, parameters: parameters).responseData { response in
-            
-            guard let data = response.value else { return }
-            do {
-                let decoder = JSONDecoder()
-                let decodedResponse = try decoder.decode(NewsResponse.self, from: data)
-                completion(decodedResponse)
-            } catch {
-                print(error)
-            }
-        }
         
-        AF.request(url, method: .get, parameters: parameters).responseJSON { response in
+            AF.request(url, method: .get, parameters: parameters).responseData { response in
+                
+                guard let data = response.value else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedResponse = try decoder.decode(NewsResponse.self, from: data)
+                    completion(decodedResponse)
+                } catch {
+                    print(error)
+                }
+            }
             
-            guard let json = response.value else { return }
-            print(json)
-        }
+            AF.request(url, method: .get, parameters: parameters).responseJSON { response in
+                
+                guard let json = response.value else { return }
+                print(json)
+            }
+        
     }
     
     

@@ -76,18 +76,38 @@ extension NewsViewController: UITableViewDataSource {
         
         // Description
         cell.textDescription.text = allNews.response.items[indexPath.row].text
-        let sourceId = allNews.response.items[indexPath.row].sourceId
         
         // Name and icon
+        let sourceId = allNews.response.items[indexPath.row].sourceId
+        
         if sourceId > 0  {
             if let profile = allNews.response.profiles.first(where: {$0.id == sourceId}) {
                 cell.name.text = profile.firstName + " " + profile.lastName
                 setImageToTheUserImage(string: profile.photo)
             }
-        } else { // group name
+        } else { 
             if let group = allNews.response.groups.first(where: {$0.id == abs(sourceId)}) {
                 cell.name.text = group.name
                 setImageToTheUserImage(string: group.photo)
+            }
+        }
+        
+        if let typeOfContent = allNews.response.items[indexPath.row].copyHistory?[0].attachments?[0].type {
+            switch typeOfContent {
+            case "photo":
+                if let photo = allNews.response.items[indexPath.row].copyHistory?[0].attachments?[0].photo?.photo {
+                    setImageToThePhotoImage(string: photo)
+                }
+            case "video":
+                if let photo = allNews.response.items[indexPath.row].copyHistory?[0].attachments?[0].video?.photo {
+                    setImageToThePhotoImage(string: photo)
+                }
+            case "album":
+                if let photo = allNews.response.items[indexPath.row].copyHistory?[0].attachments?[0].album?.thumb.photo {
+                    setImageToThePhotoImage(string: photo)
+                }
+            default:
+                return cell
             }
         }
         

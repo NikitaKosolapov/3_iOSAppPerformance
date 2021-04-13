@@ -26,7 +26,7 @@ struct News: Codable {
     let comments: Comments
     let likes: Likes
     let reposts: Reposts
-    let copyHistory: [Attachments]?
+    let copyHistory: [CopyHistory]?
     
     enum CodingKeys: String, CodingKey {
         case sourceId = "source_id"
@@ -38,6 +38,11 @@ struct News: Codable {
         case reposts
         case copyHistory = "copy_history"
     }
+}
+
+struct CopyHistory: Codable {
+    let text: String
+    let attachments: [Attachments]?
 }
 
 struct Attachments: Codable {
