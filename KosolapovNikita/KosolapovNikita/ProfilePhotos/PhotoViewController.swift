@@ -68,39 +68,22 @@ extension PhotoController: UICollectionViewDataSource {
         // Setup cells
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoViewCell", for: indexPath) as! PhotoCollectionViewCell
         
-        // Set user's image to the cell
-        if let photos = photos {
-            if let imageUrl = URL(string: photos[indexPath.row].url) {
-                
-                cell.image.image = nil
-                
-                DispatchQueue.global().async {
-                    do {
-                        let data = try Data(contentsOf: imageUrl)
-                        guard let image = UIImage(data: data) else { return }
-                        self.profileImages.append(image)
-                        DispatchQueue.main.async {
-                            cell.image.image = image
-                        }
-                    } catch {
-                        print(error)
+        guard let photos = photos else { return UICollectionViewCell() }
+        
+        cell.configure(image: photos[indexPath.row])
+        
+        return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowPhotoDetail" {
+            if let selectedIndexPathRow = collectionView?.indexPathsForSelectedItems?.first?.row { // get indexPath for selected item
+                if let photoDetailViewController = segue.destination as? SelectedPhotoViewController { // get link to photoDetailViewController
+                    photoDetailViewController.currentPhotoNumber = selectedIndexPathRow // set current photo number into photoDetailViewController
                 }
             }
         }
     }
-    return cell
-}
-
-override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "ShowPhotoDetail" {
-        if let selectedIndexPathRow = collectionView?.indexPathsForSelectedItems?.first?.row { // get indexPath for selected item
-            if let photoDetailViewController = segue.destination as? SelectedPhotoViewController { // get link to photoDetailViewController
-                photoDetailViewController.currentPhotoNumber = selectedIndexPathRow // set current photo number into photoDetailViewController
-                photoDetailViewController.profileImages = profileImages
-            }
-        }
-    }
-}
 }
 
 // Setup UICollectionView flow layout

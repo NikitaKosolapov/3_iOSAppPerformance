@@ -12,17 +12,49 @@ class NewsViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    var allNews: NewsResponse?
+    var news: [NewsItem] = [] // Define news
+    
+    // "Pull to refresh"
+    var refreshControl = UIRefreshControl()
+    var nextFrom = ""
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTableViewCell")
+        tableView.prefetchDataSource = self // "Pull to refresh"
+        //        tableView.delegate = self
         
-        MakeRequest.shared.getNews { [weak self] news in
-            self?.allNews = news
+        setupRefreshControl() // "Pull to refresh" add refresh control
+        
+        MakeRequest.shared.getNews() { [weak self] (news,nextFrom)  in
+            self?.news = news
+            
+            self?.nextFrom = nextFrom ?? "" // "Infinite scrolling"
             self?.tableView.reloadData()
+        }
+    }
+    
+    // "Pull to refresh" refresh control
+    func setupRefreshControl() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refreshControl.tintColor = .gray
+        refreshControl.addTarget(self, action: #selector(self.refreshNews), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    @objc func refreshNews() {
+        self.refreshControl.beginRefreshing() // begin updating
+        let mostFreshNewsDate = self.news.first?.date ?? Date()  // define most fresh news or take current time
+        MakeRequest.shared.getNews(startTime: mostFreshNewsDate + 1) { [weak self] (news,nextFrom) in
+            guard let self = self else { return }
+            self.refreshControl.endRefreshing() // turn off refreshControl
+            guard news.count > 0 else { return }
+            self.news = news + self.news
+            let indexSet = IndexSet(integersIn: 0..<news.count)
+            self.tableView.insertSections(indexSet, with: .automatic)
         }
     }
 }
@@ -34,8 +66,7 @@ extension NewsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let allNews = allNews else { return 0 }
-        return allNews.response.items.count
+        return self.news.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,24 +74,54 @@ extension NewsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
         cell.selectionStyle = .none
         
-        // Check allNews != nil
-        guard let allNews = allNews else { return UITableViewCell() }
-        
         // Define news
-        let news = allNews.response.items[indexPath.row]
+        let item = self.news[indexPath.row]
         
-        // Define source ID
-        let sourceId = news.sourceId
-        
-        // Define owner of news (see documentation of VK API)
-        if sourceId > 0 {
-            let profiles = allNews.response.profiles.first(where: {$0.id == sourceId})
-            cell.configure(news: news, profiles: profiles, groups: nil)
-        } else {
-            let groups = allNews.response.groups.first(where: {$0.id == abs(sourceId)})
-            cell.configure(news: news, profiles: nil, groups: groups)
+        switch item.type {
+            
+        case .post:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
+            cell.configure(item: item)
+            return cell
+        case .photo:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
+            cell.configure(item: item)
+            return cell
         }
-        
-        return cell
     }
 }
+
+extension NewsViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard let maxRow = indexPaths.map({$0.row}).max()else { return }
+        print(maxRow)
+        if maxRow > self.news.count - 3,
+            !isLoading {
+            isLoading = true
+            MakeRequest.shared.getNews(startFrom: nextFrom) { [weak self] (news, nextFrom) in
+                guard let self = self,
+                    let nextFrom = nextFrom else { return }
+                self.nextFrom = nextFrom
+                let indexSet = IndexSet(integersIn: self.news.count..<self.news.count + news.count)
+                let indexPaths = indexSet.map{IndexPath(row:$0, section:0)}
+                self.news.append(contentsOf: news)
+                self.tableView.insertRows(at: indexPaths, with: .automatic)
+                self.isLoading = false
+            }
+        }
+    }
+}
+
+//extension NewsViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        switch indexPath.row {
+//        case 2:
+//            let tableWidth = tableView.bounds.width
+//            let news = self.allNews![indexPath.row]
+//            let cellHeight = tableWidth * news.attachments
+//            return cellHeight
+//        default:
+//            return UITableView.automaticDimension
+//        }
+//    }
+//}

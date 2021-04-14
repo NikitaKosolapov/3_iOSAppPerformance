@@ -25,13 +25,13 @@ class MyFriendsTableViewCell: UITableViewCell {
         })
     }
     
-    func configure(friend: User) {
+    func configure(user: User) {
         
         // Icon
-        let url = friend.avatarUrl
+        let url = user.photo
         self.userImageView.imageView.loadImageUsingCache(withUrl: url)
         
         // Name
-        self.userNameLabel.text = friend.lastName + " " + friend.firstName
+        self.userNameLabel.text = user.lastName + " " + user.firstName
     }
 }
